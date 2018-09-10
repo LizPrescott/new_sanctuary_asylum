@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180729212537) do
+ActiveRecord::Schema.define(version: 20180910004933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,18 @@ ActiveRecord::Schema.define(version: 20180729212537) do
     t.datetime "updated_at",                null: false
     t.integer  "community_id"
     t.index ["community_id"], name: "index_events_on_community_id", using: :btree
+  end
+
+  create_table "family_relationships", force: :cascade do |t|
+    t.integer  "friend_id"
+    t.integer  "relation_id"
+    t.string   "relationship_type"
+    t.integer  "reciprocal_relationship_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["friend_id"], name: "index_family_relationships_on_friend_id", using: :btree
+    t.index ["reciprocal_relationship_id"], name: "index_family_relationships_on_reciprocal_relationship_id", unique: true, using: :btree
+    t.index ["relation_id"], name: "index_family_relationships_on_relation_id", using: :btree
   end
 
   create_table "friend_event_attendances", force: :cascade do |t|
