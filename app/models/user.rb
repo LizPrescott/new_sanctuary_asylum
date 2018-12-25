@@ -39,7 +39,7 @@ class User < ApplicationRecord
       filter_first_name
       filter_last_name
       filter_email
-      with_volunteer_type
+      filter_volunteer_type
       sorted_by
 
     ]
@@ -91,7 +91,7 @@ class User < ApplicationRecord
     *terms.map { |e| [e] * num_or_conds }.flatten
   )
 }
-  scope :with_volunteer_type, ->(volunteer_type) {
+  scope :filter_volunteer_type, ->(volunteer_type) {
     where(volunteer_type: volunteer_type)
   }
 
