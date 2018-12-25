@@ -74,7 +74,7 @@ class User < ApplicationRecord
     end
   }
 
-  scope :search_query, lambda { |query|
+  scope :search_query, lambda do |query|
   return nil  if query.blank?
   terms = query.downcase.split(/\s+/)
   terms = terms.map { |e|
@@ -90,7 +90,8 @@ class User < ApplicationRecord
     }.join(' AND '),
     *terms.map { |e| [e] * num_or_conds }.flatten
   )
-}
+  end
+  
   scope :filter_volunteer_type, ->(volunteer_type) {
     where(volunteer_type: volunteer_type)
   }
